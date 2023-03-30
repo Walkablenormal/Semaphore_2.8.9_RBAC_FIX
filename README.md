@@ -13,7 +13,7 @@ To build this version, you need to follow the folling step;
   <li>Install Go.</li>
   <li>Install Go-Task.</li>
   <li>Install Goreleaser.</li>
-  <li>Add Go to $PATH (export PATH=$PATH:$(go env GOPATH)/bin).</li>
+  <li>Add Go to PATH.</li>
   <li>Clone the repository (git clone https://github.com/Walkablenormal/Semaphore_2.8.9_RBAC_FIX.git).</li>
   <li>Enter the folder.</li>
   <li>Use Go-Task to build (task -t Taskfile.yml all).</li>
