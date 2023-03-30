@@ -9,17 +9,17 @@ This repository is a slightly altered version of the 2.8.9 release that disables
 To build this version, you need to follow the folling step;
 
 <ul>
-  <li>Install Git.<li>
-  <li>Install Go.<li>
-  <li>Install Go-Task.<li>
-  <li>Install Goreleaser.<li>
-  <li>Add Go to $PATH (export PATH=$PATH:$(go env GOPATH)/bin).<li>
-  <li>Clone the repository (git clone https://github.com/Walkablenormal/Semaphore_2.8.9_RBAC_FIX.git).<li>
-  <li>Enter the folder.<li>
-  <li>Use Go-Task to build (task -t Taskfile.yml all).<li>
-  <li>Enter the newly-created 'bin' folder.<li>
-  <li>Install Semaphore (./semaphore setup).<li>
-<ul>
+  <li>Install Git.</li>
+  <li>Install Go.</li>
+  <li>Install Go-Task.</li>
+  <li>Install Goreleaser.</li>
+  <li>Add Go to $PATH (export PATH=$PATH:$(go env GOPATH)/bin).</li>
+  <li>Clone the repository (git clone https://github.com/Walkablenormal/Semaphore_2.8.9_RBAC_FIX.git).</li>
+  <li>Enter the folder.</li>
+  <li>Use Go-Task to build (task -t Taskfile.yml all).</li>
+  <li>Enter the newly-created 'bin' folder.</li>
+  <li>Install Semaphore (./semaphore setup).</li>
+</ul>
 
 ## Support the developer!
 
