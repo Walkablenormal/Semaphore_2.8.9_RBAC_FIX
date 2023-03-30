@@ -132,31 +132,20 @@ func Route() *mux.Router {
 	projectUserAPI.Path("/users").HandlerFunc(projects.GetUsers).Methods("GET", "HEAD")
 
 	projectUserAPI.Path("/keys").HandlerFunc(projects.GetKeys).Methods("GET", "HEAD")
-	projectUserAPI.Path("/keys").HandlerFunc(projects.AddKey).Methods("POST")
-
+	
 	projectUserAPI.Path("/repositories").HandlerFunc(projects.GetRepositories).Methods("GET", "HEAD")
-	projectUserAPI.Path("/repositories").HandlerFunc(projects.AddRepository).Methods("POST")
-
+	
 	projectUserAPI.Path("/inventory").HandlerFunc(projects.GetInventory).Methods("GET", "HEAD")
-	projectUserAPI.Path("/inventory").HandlerFunc(projects.AddInventory).Methods("POST")
-
+	
 	projectUserAPI.Path("/environment").HandlerFunc(projects.GetEnvironment).Methods("GET", "HEAD")
-	projectUserAPI.Path("/environment").HandlerFunc(projects.AddEnvironment).Methods("POST")
-
+	
 	projectUserAPI.Path("/tasks").HandlerFunc(projects.GetAllTasks).Methods("GET", "HEAD")
 	projectUserAPI.HandleFunc("/tasks/last", projects.GetLastTasks).Methods("GET", "HEAD")
-	projectUserAPI.Path("/tasks").HandlerFunc(projects.AddTask).Methods("POST")
-
+	
 	projectUserAPI.Path("/templates").HandlerFunc(projects.GetTemplates).Methods("GET", "HEAD")
-	projectUserAPI.Path("/templates").HandlerFunc(projects.AddTemplate).Methods("POST")
-
-	projectUserAPI.Path("/schedules").HandlerFunc(projects.AddSchedule).Methods("POST")
-	projectUserAPI.Path("/schedules/validate").HandlerFunc(projects.ValidateScheduleCronFormat).Methods("POST")
-
+	
 	projectUserAPI.Path("/views").HandlerFunc(projects.GetViews).Methods("GET", "HEAD")
-	projectUserAPI.Path("/views").HandlerFunc(projects.AddView).Methods("POST")
-	projectUserAPI.Path("/views/positions").HandlerFunc(projects.SetViewPositions).Methods("POST")
-
+	
 	projectAdminAPI := authenticatedAPI.Path("/project/{project_id}").Subrouter()
 	projectAdminAPI.Use(projects.ProjectMiddleware, projects.MustBeAdmin)
 	projectAdminAPI.Methods("PUT").HandlerFunc(projects.UpdateProject)
@@ -165,6 +154,26 @@ func Route() *mux.Router {
 	projectAdminUsersAPI := authenticatedAPI.PathPrefix("/project/{project_id}").Subrouter()
 	projectAdminUsersAPI.Use(projects.ProjectMiddleware, projects.MustBeAdmin)
 	projectAdminUsersAPI.Path("/users").HandlerFunc(projects.AddUser).Methods("POST")
+
+    // Start of routes changed from projectUserApi to projectAdminUsersAPI.
+	projectAdminUsersAPI.Path("/keys").HandlerFunc(projects.AddKey).Methods("POST")
+
+	projectAdminUsersAPI.Path("/repositories").HandlerFunc(projects.AddRepository).Methods("POST")
+
+	projectAdminUsersAPI.Path("/inventory").HandlerFunc(projects.AddInventory).Methods("POST")
+
+	projectAdminUsersAPI.Path("/environment").HandlerFunc(projects.AddEnvironment).Methods("POST")
+
+	projectAdminUsersAPI.Path("/tasks").HandlerFunc(projects.AddTask).Methods("POST")
+
+	projectAdminUsersAPI.Path("/templates").HandlerFunc(projects.AddTemplate).Methods("POST")
+
+	projectAdminUsersAPI.Path("/schedules").HandlerFunc(projects.AddSchedule).Methods("POST")
+	projectAdminUsersAPI.Path("/schedules/validate").HandlerFunc(projects.ValidateScheduleCronFormat).Methods("POST")
+
+	projectAdminUsersAPI.Path("/views").HandlerFunc(projects.AddView).Methods("POST")
+	projectAdminUsersAPI.Path("/views/positions").HandlerFunc(projects.SetViewPositions).Methods("POST")
+    // End of changed routes.
 
 	projectUserManagement := projectAdminUsersAPI.PathPrefix("/users").Subrouter()
 	projectUserManagement.Use(projects.UserMiddleware)
